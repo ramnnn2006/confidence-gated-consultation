@@ -1,18 +1,12 @@
 # Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems (CG-SC)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-334155?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/Python-3.8+-334155?style=flat-square)](https://www.python.org/downloads/)
-[![Paper Status](https://img.shields.io/badge/IEEE-Conference%20Ready-334155?style=flat-square)]()
-[![Review Status](https://img.shields.io/badge/Review%202-Prototype%20Audited-334155?style=flat-square)]()
-[![Benchmarks](https://img.shields.io/badge/Benchmarks-StrategyQA%20%7C%20MMLU%20Law-334155?style=flat-square)]()
-
 > **Official Research Repository:** *Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems*  
 > **Core Literature Foundation:** Grounded in **Lee & Kwon (2026, *Applied Sciences*)**, **Jiang & Yang (2025, *Systems*)**, **Zhu et al. (2026)**, and **Kalyuzhnaya et al. (2025)**.  
 > **Full Documentation:** See the [`docs/`](docs/) directory for detailed review reports, mathematical proofs, and study guides.
 
 ---
 
-## 🏛️ System Architecture
+## System Architecture
 
 ```mermaid
 flowchart TD
@@ -44,7 +38,7 @@ flowchart TD
 
 ---
 
-## 👥 Competing Values Framework (CVF) Agent Personas
+## Competing Values Framework (CVF) Agent Personas
 
 When genuine epistemic uncertainty ($C(x) < 0.50$) triggers the Delphi committee, four orthogonal agent personas are instantiated to provide Pareto-optimal deliberation without echo-chamber bias:
 
@@ -68,7 +62,7 @@ flowchart LR
 
 ---
 
-## 📌 The Research Gap
+## The Research Gap
 
 Current Multi-Agent Systems (e.g., the Base Paper by **Lee & Kwon, 2026, *Applied Sciences***) enforce **unconditional multi-agent consultation**: every incoming query—regardless of whether it is an undisputed legal statute or a high-stakes ethical dilemma—triggers an exhaustive 6-agent, 3-round Delphi deliberation.
 
@@ -81,7 +75,7 @@ CAG-Delphi acts as an **intelligent epistemic router**. Straightforward queries 
 
 ---
 
-## 🔬 Empirical Results (200 Real Academic Benchmark Questions)
+## Empirical Results (200 Real Academic Benchmark Questions)
 
 Evaluated end-to-end across **200 real questions** from recognized academic datasets:
 - **StrategyQA (100 Questions):** Strategic multi-step reasoning dilemmas (Stanford / TAU).
@@ -109,7 +103,7 @@ Method / Architecture               Accuracy       Avg Tokens/Query   Token Savi
 
 ---
 
-## 🚀 Quickstart: Running Demos Live
+## Quickstart: Running Demos Live
 
 ```bash
 # 1. Run the full execution testbench across all 200 real academic benchmark questions:
@@ -124,7 +118,7 @@ python3 simulation_testbench.py --episodes 100
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 confidence-gated-consultation/
@@ -172,7 +166,7 @@ confidence-gated-consultation/
 
 ---
 
-## 👥 Review 2 Presentation Guide (Team of 2)
+## Review 2 Presentation Guide (Team of 2)
 
 | Teammate | Focus Area | Live Actions During Review |
 | :--- | :--- | :--- |
@@ -181,7 +175,7 @@ confidence-gated-consultation/
 
 ---
 
-## 📚 References
+## References
 
 ```bibtex
 @article{lee2026multi,

@@ -1,4 +1,4 @@
-# CAG-Delphi: Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems
+# Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems (CG-SC)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -6,38 +6,95 @@
 [![Review Status](https://img.shields.io/badge/Review%202-Prototype%20Audited-brightgreen.svg)]()
 [![Benchmarks](https://img.shields.io/badge/Benchmarks-StrategyQA%20%7C%20MMLU%20Law-orange.svg)]()
 
-> **Official Research Repository for:** *Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems*  
+> **Official Research Repository:** *Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems*  
 > **Core Literature Foundation:** Grounded in **Lee & Kwon (2026, *Applied Sciences*)**, **Jiang & Yang (2025, *Systems*)**, **Zhu et al. (2026)**, and **Kalyuzhnaya et al. (2025)**.  
-> **Consolidated Project Report:** See [`REVIEW_2_OFFICIAL_RESEARCH_PROJECT_REPORT.md`](REVIEW_2_OFFICIAL_RESEARCH_PROJECT_REPORT.md) for full project documentation and Review 2 defense notes.
+> **Full Documentation:** See the [`docs/`](docs/) directory for detailed review reports, mathematical proofs, and study guides.
 
 ---
 
-## 🖼️ Master Architecture & Systems Overview
+## 🏛️ System Architecture
 
-![CAG-Delphi Master Systems Architecture](figures/fig4_review2_master_overview.png)
+```mermaid
+flowchart TD
+    In["User Query / Task (x)"] --> PA["Primary Agent (A₀)\nGenerates Initial Output & Next-Token Logits"]
+    PA --> ECG["Epistemic Confidence Gating (G-ECG)\nC(x) = 0.50·(1 - H̃) + 0.30·Agreement + 0.20·GEval"]
+    
+    ECG --> Gate{"Confidence C(x)"}
+    
+    Gate -- "C(x) ≥ 0.65\n(High Certainty)" --> Solo["SOLO FAST-PATH\n• 1 Agent | 0 Peer Tokens\n• Latency: ~0.84s\n• Saves 91% tokens vs debate"]
+    
+    Gate -- "0.50 ≤ C(x) < 0.65\n(Moderate Ambiguity)" --> Dyad["DYADIC CHALLENGER\n• 2 Agents: Proposer + Adversarial Critic\n• 1 Targeted Round (~440 tokens)\n• Fast Hallucination Catch"]
+    
+    Gate -- "C(x) < 0.50\n(Genuine Dilemma)" --> Delphi["DECOUPLED DELPHI COMMITTEE\n• 4 CVF Pareto Personas\n• Decoupled Belief Propagation (DOBP)\n• Kendall's W Early Exit (W ≥ 0.70)"]
+    
+    Solo --> Out["Final Verified Decision Outcome"]
+    Dyad --> Out
+    Delphi --> Out
+
+    classDef primary fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
+    classDef gate fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#f8fafc;
+    classDef solo fill:#0f2e1b,stroke:#10b981,stroke-width:2px,color:#34d399;
+    classDef dyad fill:#172554,stroke:#60a5fa,stroke-width:2px,color:#93c5fd;
+    classDef delphi fill:#3b0764,stroke:#d946ef,stroke-width:2px,color:#f472b6;
+    classDef finalNode fill:#1e293b,stroke:#e2e8f0,stroke-width:2px,color:#f8fafc;
+
+    class In,PA primary;
+    class ECG,Gate gate;
+    class Solo solo;
+    class Dyad dyad;
+    class Delphi delphi;
+    class Out finalNode;
+```
 
 ---
 
-## 📌 Executive Summary & Research Gap
+## 👥 Competing Values Framework (CVF) Agent Personas
 
-Current Large Language Model Multi-Agent Systems (LLM-MAS) suffer from a fundamental design flaw:
-> **The Unconditional Consultation Dilemma:** As exemplified by the Base Paper (**Lee & Kwon, 2026**), multi-agent deliberation operates as an unconditional, always-on graph. Every problem unconditionally summons an exhaustive 6-agent, 3-round Delphi deliberation, incurring an exorbitant **$4\times\text{ to }10\times$ token overhead** (~3,200 to 7,100 tokens/query) and inducing **debate degeneration** (peer noise confusing simple, obvious facts).
+When genuine epistemic uncertainty ($C(x) < 0.50$) triggers the Delphi committee, four orthogonal agent personas are instantiated to provide Pareto-optimal deliberation without echo-chamber bias:
 
-### The CAG-Delphi Solution
-CAG-Delphi introduces **Epistemic Confidence Gating (G-ECG)** and **Dynamic Topology Morphing (DTM)**:
-1. **Tier 1 — Epistemic Confidence Gating (G-ECG):** Evaluates primary agent $A_0$ certainty using normalized Shannon token entropy, semantic consistency, and fast G-Eval rubrics:
-   $$C(x) = 0.50 \cdot (1 - \tilde{H}(p)) + 0.30 \cdot \text{Agreement} + 0.20 \cdot \text{GEval}$$
-2. **Tier 2 — Dynamic Topology Morphing (DTM):**
-   - **`SOLO_FAST_PATH`** ($C(x) \ge 0.65$): Answered by a single model in ~0.8s at **$0$ peer token cost**.
-   - **`DYADIC_CHALLENGER`** ($0.50 \le C(x) < 0.65$): 2-agent proposer-critic verification.
-   - **`DECOUPLED_DELPHI`** ($C(x) < 0.50$): 4 Pareto-separated Competing Values Framework (CVF) agents with Kendall's $W$ early-exit consensus.
-3. **Tier 3 — Decoupled Belief Propagation (DOBP):** Replaces verbose dialogue transcripts with 3D belief-state vectors, slashing prompt overhead by **64%**.
+```mermaid
+flowchart LR
+    subgraph CVF_Space ["Competing Values Framework (Cameron & Quinn 2006 / Lee & Kwon 2026)"]
+        direction TB
+        subgraph TopFlex ["Flexibility & Discretion"]
+            Clan["Clan Agent (θ₁)\n• Internal Cohesion & Ethics\n• Patient Autonomy\n• Harm Minimization"]
+            Adhocracy["Adhocracy Agent (θ₂)\n• Systemic Innovation\n• Dynamic Precedent\n• Adaptive Strategy"]
+        end
+        subgraph BottomStab ["Stability & Control"]
+            Hierarchy["Hierarchy Agent (θ₄)\n• Statutory Precedent\n• Evidentiary Strictness\n• Procedural Compliance"]
+            Market["Market Agent (θ₃)\n• Fiscal Cost Efficiency\n• Resource Allocation\n• Measurable Outcomes"]
+        end
+    end
+
+    classDef clan fill:#064e3b,stroke:#34d399,stroke-width:1.5px,color:#ecfdf5;
+    classDef adhoc fill:#4c1d95,stroke:#c084fc,stroke-width:1.5px,color:#faf5ff;
+    classDef market fill:#78350f,stroke:#fbbf24,stroke-width:1.5px,color:#fffbeb;
+    classDef hier fill:#1e3a5f,stroke:#60a5fa,stroke-width:1.5px,color:#eff6ff;
+
+    class Clan clan;
+    class Adhocracy adhoc;
+    class Market market;
+    class Hierarchy hier;
+```
 
 ---
 
-## 🔬 Empirical Results Across 200 Real Academic Benchmark Questions
+## 📌 The Research Gap
 
-The framework was evaluated end-to-end on **200 real academic questions** from gold-standard datasets:
+Current Multi-Agent Systems (e.g., the Base Paper by **Lee & Kwon, 2026, *Applied Sciences***) enforce **unconditional multi-agent consultation**: every incoming query—regardless of whether it is an undisputed legal statute or a high-stakes ethical dilemma—triggers an exhaustive 6-agent, 3-round Delphi deliberation.
+
+This causes two fatal issues:
+1. **Severe Token Inflation:** Exhaustive deliberation burns **3,200 to 7,100 tokens per prompt**, leading to high costs and 5.46-second latencies.
+2. **Debate Degeneration:** Forcing models to debate straightforward factual or legal queries introduces peer noise that confuses the agents, causing accuracy to collapse (e.g., from **70.0% down to 43.0%** on StrategyQA).
+
+### The Solution: Epistemic Gating
+CAG-Delphi acts as an **intelligent epistemic router**. Straightforward queries are answered immediately on the Solo Fast-Path ($0$ peer tokens), while only ambiguous dilemmas activate peer debate.
+
+---
+
+## 🔬 Empirical Results (200 Real Academic Benchmark Questions)
+
+Evaluated end-to-end across **200 real questions** from recognized academic datasets:
 - **StrategyQA (100 Questions):** Strategic multi-step reasoning dilemmas (Stanford / TAU).
 - **MMLU Professional Law (100 Questions):** High-stakes US Bar Examination evidentiary precedent (Hendrycks et al. / UC Berkeley).
 
@@ -53,101 +110,89 @@ Method / Architecture               Accuracy       Avg Tokens/Query   Token Savi
 ==========================================================================================
 ```
 
-### Key Scientific Findings:
+### Key Discoveries:
 1. **Debate Degeneration Eliminated on StrategyQA:**
    - Single Agent: **70.0% accuracy**
-   - Unconditional Delphi (Base Paper): drops to **43.0% accuracy** *(Agents over-intellectualize and persuade each other of incorrect answers)*
-   - **CAG-Delphi: 69.0% accuracy with 56.8% token savings** *(Confidence gating routes simple queries to the Solo Fast-Path, preventing peer confusion)*.
-2. **50.88% Net Token Reduction:** Slashed average token consumption from 3,182 to 1,562 tokens per question.
-3. **Latency:** Reduced average wall-clock latency from 5.46 seconds down to 1.42 seconds.
-
----
-
-## 📁 Repository Directory & File Guide
-
-```text
-rp/
-├── README.md                                  # This master guide
-├── REVIEW_2_OFFICIAL_RESEARCH_PROJECT_REPORT.md# Consolidated official Review 2 defense report
-├── confidencellmsaiagents.xlsx                # Literature survey sheet (16 peer-reviewed papers)
-├── cag_delphi_paper.tex                       # Complete IEEE Transactions LaTeX paper
-├── cag_delphi_paper.pdf                       # Compiled camera-ready PDF manuscript
-│
-├── cag_delphi_engine/                         # Modular Python Architecture Engine
-│   ├── __init__.py                            # Package exports
-│   ├── gating.py                              # Epistemic Confidence Gating (G-ECG) & Shannon Entropy
-│   ├── topology.py                            # Dynamic Topology Morphing (DTM) & Belief Propagation
-│   ├── consensus.py                           # Kendall's W convergence & Early-Stopping Delphi
-│   ├── diversity.py                           # Competing Values Framework (CVF) Pareto separation
-│   └── benchmark.py                           # Multi-agent benchmark runner
-│
-├── data/                                      # Empirical Datasets & Audit Logs
-│   ├── decision_episodes.jsonl                # 500-episode calibrated Monte Carlo simulation
-│   ├── pareto_frontier.csv                    # Empirical Pareto frontier points (tau sweep)
-│   ├── testbench_report_100.json              # 100-episode testbench statistical report
-│   ├── testbench_report_500.json              # 500-episode testbench statistical report
-│   └── real_benchmarks/                       # Real Academic Ingestion & Audit
-│       ├── real_decision_benchmarks.jsonl     # 200 real questions (StrategyQA + MMLU Law)
-│       ├── full_run_execution_log.jsonl       # Full JSONL execution trace for all 200 questions
-│       └── FULL_EXECUTION_AUDIT_REPORT.md     # Full markdown execution audit report
-│
-├── figures/                                   # High-Resolution Publication Figures
-│   ├── fig1_pareto_accuracy_vs_tokens.png     # Pareto curve: Accuracy vs Token cost (PNG + SVG)
-│   ├── fig2_delphi_convergence_rounds.png     # Delphi Kendall's W convergence rounds (PNG + SVG)
-│   ├── fig3_dynamic_topology_allocation.png   # 3-way topology routing breakdown (PNG + SVG)
-│   └── fig4_review2_master_overview.png       # Review 2 Master Systems Map (PNG + SVG)
-│
-├── papers/                                    # Literature Survey Library
-│   ├── README.md                              # Literature index with DOIs and abstracts
-│   └── Paper1_Lee_Kwon_2026.pdf ...           # All 16 complete downloaded paper PDFs
-│
-├── skills/                                    # Antigravity / Agent Skill Definition
-│   └── confidence-gated-consultation/SKILL.md # Global Agent Skill definition
-│
-└── Interactive & Execution Scripts:
-    ├── run_full_dataset_execution.py          # Runs all 200 real benchmark questions with live audit
-    ├── cag_delphi_live_showcase.py            # Live streaming ethical decision theater
-    ├── simulation_testbench.py                # 500-episode Monte Carlo testbench with 95% CIs
-    ├── evaluate_on_real_benchmarks.py         # Real benchmark evaluation script
-    ├── fetch_real_benchmark_data.py           # Ingestion script for StrategyQA & MMLU Law
-    ├── run_live_decision_demo.py              # CPU timing and Shannon entropy logger
-    └── generate_master_figure.py              # Generates Figure 4 vector assets
-```
+   - Unconditional Delphi (Base Paper): **43.0% accuracy** *(Peer noise confused simple facts)*
+   - **CAG-Delphi: 69.0% accuracy with 56.8% token savings** *(Confidence gating shielded simple queries from peer noise)*.
+2. **50.88% Net Token Reduction:** Slashed average tokens from 3,182 down to 1,562 per query.
+3. **Latency Slashed:** Reduced average response time from 5.46 seconds to 1.42 seconds.
 
 ---
 
 ## 🚀 Quickstart: Running Demos Live
 
-### 1. Run All 200 Real Benchmark Questions
-Executes the full testbench across StrategyQA and MMLU Professional Law:
 ```bash
+# 1. Run the full execution testbench across all 200 real academic benchmark questions:
 python3 run_full_dataset_execution.py
-```
 
-### 2. Run the Live Interactive Ethical Deliberation Theater
-Streams the real-time deliberation of the Clan, Adhocracy, Market, and Hierarchy agents resolving complex dilemmas:
-```bash
+# 2. Run the real-time interactive ethical decision theater (Medical Triage & Satellite Dilemma):
 python3 cag_delphi_live_showcase.py
+
+# 3. Run the 500-episode Monte Carlo scientific testbench with 95% Confidence Intervals:
+python3 simulation_testbench.py --episodes 100
 ```
 
-### 3. Run the 500-Episode Monte Carlo Scientific Testbench
-Computes 95% Confidence Intervals across multiple domains:
-```bash
-python3 simulation_testbench.py --episodes 100
+---
+
+## 📁 Repository Structure
+
+```text
+confidence-gated-consultation/
+├── README.md                                  # Master repository guide (this file)
+│
+├── cag_delphi_engine/                         # Core Python Modular Package
+│   ├── gating.py                              # Epistemic Confidence Gating & Shannon Entropy
+│   ├── topology.py                            # Dynamic Topology Morphing & Decoupled Belief Propagation
+│   ├── consensus.py                           # Kendall's W convergence & Early-Stopping Delphi
+│   ├── diversity.py                           # Competing Values Framework (CVF) Pareto separation
+│   └── benchmark.py                           # Multi-agent benchmark runner
+│
+├── data/                                      # Experimental Data & Real Benchmarks
+│   ├── real_benchmarks/                       # 200 Real Academic Questions (StrategyQA + MMLU Law)
+│   │   ├── real_decision_benchmarks.jsonl     # Clean ingested benchmark dataset
+│   │   ├── full_run_execution_log.jsonl       # Full execution trace for all 200 questions
+│   │   └── FULL_EXECUTION_AUDIT_REPORT.md     # Question-by-question audit table
+│   ├── decision_episodes.jsonl                # 500-episode calibrated Monte Carlo dataset
+│   └── pareto_frontier.csv                    # Empirical Pareto frontier points (tau sweep)
+│
+├── docs/                                      # Research Documentation & Guides
+│   ├── REVIEW_2_OFFICIAL_RESEARCH_PROJECT_REPORT.md # Consolidated Review 2 defense report
+│   ├── MASTER_STUDY_GUIDE_AND_EXECUTIVE_PITCH.md    # Technical study guide & marketing pitch
+│   ├── TEAMMATE_WORK_DELEGATION_AND_REVIEW2_CHECKLIST.md # Teammate task division & script
+│   ├── NOVEL_METHODS_MATHEMATICAL_PROOFS.md         # Formal mathematical proofs
+│   └── DEEP_LITERATURE_CRITIQUE_15_PAPERS.md       # Critique of 15 supporting papers
+│
+├── papers/                                    # Literature Survey Library
+│   ├── README.md                              # Index of 16 papers with DOIs
+│   └── Paper1_Lee_Kwon_2026.pdf ...           # All 16 complete downloaded paper PDFs
+│
+├── scripts/                                   # Data Ingestion & Utility Scripts
+│   ├── fetch_real_benchmark_data.py           # Ingestion script for StrategyQA & MMLU Law
+│   ├── evaluate_on_real_benchmarks.py         # Real benchmark evaluation script
+│   ├── generate_decision_dataset.py           # Synthetic episode generator
+│   └── generate_conference_figures.py         # Matplotlib / SVG figure generator
+│
+├── skills/                                    # Antigravity Agent Skill
+│   └── confidence-gated-consultation/SKILL.md # Global Agent Skill definition
+│
+├── cag_delphi_live_showcase.py                # Streaming interactive ethical decision theater
+├── run_full_dataset_execution.py              # Main 200-question execution engine
+└── simulation_testbench.py                    # Scientific Monte Carlo testbench
 ```
 
 ---
 
 ## 👥 Review 2 Presentation Guide (Team of 2)
 
-| Teammate | Focus Area | Live Demonstration Actions |
+| Teammate | Focus Area | Live Actions During Review |
 | :--- | :--- | :--- |
-| **Teammate 1** | **The Research Problem & Gating Mathematics**<br>• The limitation of Lee & Kwon (2026)<br>• Epistemic Confidence formula $C(x)$<br>• Solo Fast-Path ($0$ peer tokens) | Open [`figures/fig4_review2_master_overview.png`](figures/fig4_review2_master_overview.png) and run `python3 run_full_dataset_execution.py` in terminal. |
-| **Teammate 2** | **The Multi-Agent Committee & Real Benchmarks**<br>• 4 CVF personas (Clan, Adhocracy, Market, Hierarchy)<br>• Eliminating debate degeneration on StrategyQA<br>• **50.88% token reduction** across 200 real questions | Point to the StrategyQA accuracy table and run `python3 cag_delphi_live_showcase.py`. |
+| **Teammate 1** | **The Research Problem & Gating Mathematics**<br>• The limitation of Lee & Kwon (2026)<br>• Epistemic Confidence formula $C(x)$<br>• Solo Fast-Path ($0$ peer tokens) | Show the Mermaid architecture flowchart in `README.md` and run `python3 run_full_dataset_execution.py` in terminal. |
+| **Teammate 2** | **The Multi-Agent Committee & Real Benchmarks**<br>• 4 CVF personas (Clan, Adhocracy, Market, Hierarchy)<br>• Eliminating debate degeneration on StrategyQA<br>• **50.88% token reduction** on 200 real questions | Explain the CVF persona flowchart and run `python3 cag_delphi_live_showcase.py`. |
 
 ---
 
-## 📚 Citation & References
+## 📚 References
 
 ```bibtex
 @article{lee2026multi,

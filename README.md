@@ -216,6 +216,3 @@ confidence-gated-consultation/
   year={2025}
 }
 ```
-
----
-*Developed for Review 2 Evaluation | Repository: [ramnnn2006/confidence-gated-consultation](https://github.com/ramnnn2006/confidence-gated-consultation)*

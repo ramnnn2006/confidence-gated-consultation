@@ -43,7 +43,7 @@ If your department requires or allows presentation slides, she can construct a c
   - *Title:* Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems.
   - *The Problem:* Unconditional multi-agent consultation (Lee & Kwon 2026) burns 3,200+ tokens and causes debate degeneration on simple questions.
 - **Slide 2: Proposed Architecture (CAG-Delphi):**
-  - Embed [`figures/fig4_review2_master_overview.png`](figures/fig4_review2_master_overview.png).
+  - Use the native Mermaid flowchart from `README.md`.
   - Highlight the 3 topologies: Solo Fast-Path ($C(x) \ge 0.65$), Dyadic Challenger ($0.50 \le C(x) < 0.65$), and Decoupled Delphi ($C(x) < 0.50$).
 - **Slide 3: Competing Values Framework (CVF) & Consensus:**
   - Show the 4 orthogonal agent personas: Clan, Adhocracy, Market, Hierarchy.
@@ -85,7 +85,7 @@ When your team presents, she speaks during the second half (approx. 1.5 to 2 min
   python3 run_full_dataset_execution.py
   python3 cag_delphi_live_showcase.py
   ```
-- [ ] **Verify Figure 4 renders cleanly:**
-  Open [`figures/fig4_review2_master_overview.png`](figures/fig4_review2_master_overview.png).
-- [ ] **Both teammates read [`REVIEW_2_OFFICIAL_RESEARCH_PROJECT_REPORT.md`](REVIEW_2_OFFICIAL_RESEARCH_PROJECT_REPORT.md).**
+- [ ] **Verify Mermaid architecture diagrams render cleanly:**
+  Open `README.md` on GitHub and verify the flowchart and CVF matrix render.
+- [ ] **Both teammates read [`docs/REVIEW_2_OFFICIAL_RESEARCH_PROJECT_REPORT.md`](docs/REVIEW_2_OFFICIAL_RESEARCH_PROJECT_REPORT.md).**
 - [ ] **Ensure both names and roll numbers are listed** on the title slide and paper header.

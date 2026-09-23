@@ -128,8 +128,7 @@ All files are structured, modular, and committed in the GitHub repository:
 ├── figures/                                   # High-Resolution Publication Figures
 │   ├── fig1_pareto_accuracy_vs_tokens.png     # Pareto frontier: Accuracy vs Token cost (PNG + SVG)
 │   ├── fig2_delphi_convergence_rounds.png     # Delphi Kendall's W convergence (PNG + SVG)
-│   ├── fig3_dynamic_topology_allocation.png   # 3-way topology routing breakdown (PNG + SVG)
-│   └── fig4_review2_master_overview.png       # Review 2 Master Systems Architecture map (PNG + SVG)
+│   └── fig3_dynamic_topology_allocation.png   # 3-way topology routing breakdown (PNG + SVG)
 │
 ├── papers/                                    # Downloaded Research Literature
 │   ├── README.md                              # Literature index with DOIs and abstracts
@@ -179,8 +178,8 @@ All files are structured, modular, and committed in the GitHub repository:
 - **Time:** Next 1.5 minutes.
 - **Key Points:**
   1. Explain the 4 Competing Values Framework (CVF) personas (Clan, Adhocracy, Market, Hierarchy) and Kendall's $W$ early exit.
-  2. Point to [`figures/fig4_review2_master_overview.png`](figures/fig4_review2_master_overview.png).
-  3. Highlight the verified numbers on the 200 real questions: **50.88% token reduction** and preventing StrategyQA accuracy from dropping to 43.0%.
+  2. Point to the native Mermaid architecture and CVF diagrams in `README.md`.
+  3. Highlight the verified numbers on the 200 real questions: 50.88% token reduction and preventing StrategyQA accuracy from dropping to 43.0%.
 
 ---
 

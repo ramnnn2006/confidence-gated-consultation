@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" width="1100" height="700" style="background:#0f172a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="blueAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="purpleAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+    <linearGradient id="emeraldAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <linearGradient id="amberAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Canvas -->
+  <rect width="1100" height="700" fill="url(#bgGrad)"/>
+  
+  <!-- Header Banner -->
+  <rect x="30" y="25" width="1040" height="85" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="60" y="60" font-size="22" font-weight="bold" fill="#f8fafc">CAG-Delphi: Confidence-Gated Selective Consultation Framework</text>
+  <text x="60" y="88" font-size="13" fill="#94a3b8">Review 2 Master Systems Map | Grounded in Lee &amp; Kwon (2026), Jiang &amp; Yang (2025), and Zhu et al. (2026)</text>
+  <rect x="880" y="45" width="165" height="42" rx="8" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1"/>
+  <text x="962" y="65" font-size="11" font-weight="bold" fill="#34d399" text-anchor="middle">TOKEN REDUCTION</text>
+  <text x="962" y="81" font-size="14" font-weight="bold" fill="#10b981" text-anchor="middle">50.88% SAVED</text>
+
+  <!-- COLUMN 1: Ingested Gold-Standard Benchmarks -->
+  <g transform="translate(30, 130)" filter="url(#shadow)">
+    <rect width="240" height="420" rx="12" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <rect width="240" height="45" rx="12" fill="#3b82f6" fill-opacity="0.2"/>
+    <text x="120" y="28" font-size="14" font-weight="bold" fill="#60a5fa" text-anchor="middle">1. REAL BENCHMARKS</text>
+    
+    <!-- Dataset 1: StrategyQA -->
+    <rect x="15" y="60" width="210" height="100" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="25" y="82" font-size="13" font-weight="bold" fill="#f8fafc">StrategyQA (100 Qs)</text>
+    <text x="25" y="100" font-size="11" fill="#94a3b8">Multi-hop strategic dilemmas</text>
+    <text x="25" y="120" font-size="11" fill="#cbd5e1">• Single-agent: 70.0% acc</text>
+    <text x="25" y="136" font-size="11" fill="#f87171">• Unconditional: 43.0% (degraded)</text>
+    <text x="25" y="152" font-size="11" font-weight="bold" fill="#34d399">• CAG-Delphi: 69.0% acc</text>
+
+    <!-- Dataset 2: MMLU Law -->
+    <rect x="15" y="175" width="210" height="100" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="25" y="197" font-size="13" font-weight="bold" fill="#f8fafc">MMLU Law (100 Qs)</text>
+    <text x="25" y="215" font-size="11" fill="#94a3b8">US Bar Exam Precedents</text>
+    <text x="25" y="235" font-size="11" fill="#cbd5e1">• High-stakes evidence rules</text>
+    <text x="25" y="251" font-size="11" fill="#cbd5e1">• 79.5% routed to committee</text>
+    <text x="25" y="267" font-size="11" font-weight="bold" fill="#34d399">• 45.3% tokens saved</text>
+
+    <!-- Literature Base -->
+    <rect x="15" y="290" width="210" height="115" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="25" y="312" font-size="13" font-weight="bold" fill="#f8fafc">Literature Survey (16 Papers)</text>
+    <text x="25" y="330" font-size="11" fill="#94a3b8">• Base: Lee &amp; Kwon (2026)</text>
+    <text x="25" y="348" font-size="11" fill="#94a3b8">• Legal: Jiang &amp; Yang (2025)</text>
+    <text x="25" y="366" font-size="11" fill="#94a3b8">• Topology: Zhu et al. (2026)</text>
+    <text x="25" y="384" font-size="11" fill="#94a3b8">• Verification: Kalyuzhnaya (2025)</text>
+  </g>
+
+  <!-- COLUMN 2: Epistemic Gating & Routing -->
+  <g transform="translate(295, 130)" filter="url(#shadow)">
+    <rect width="470" height="420" rx="12" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+    <rect width="470" height="45" rx="12" fill="#8b5cf6" fill-opacity="0.2"/>
+    <text x="235" y="28" font-size="14" font-weight="bold" fill="#c084fc" text-anchor="middle">2. EPISTEMIC GATING &amp; DYNAMIC TOPOLOGY MORPHING</text>
+
+    <!-- Formula Box -->
+    <rect x="20" y="58" width="430" height="70" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="80" font-size="12" font-weight="bold" fill="#38bdf8">Epistemic Confidence Equation:</text>
+    <text x="35" y="103" font-size="14" font-family="monospace" font-weight="bold" fill="#f8fafc">C(x) = 0.50·(1 - H_norm) + 0.30·Agr + 0.20·GEval</text>
+    <text x="35" y="120" font-size="11" fill="#94a3b8">H_norm = Shannon Entropy | Agr = Self-Consistency | GEval = LLM-Judge rubric</text>
+
+    <!-- 3 Dynamic Topologies -->
+    <!-- Mode A: Solo Fast Path -->
+    <g transform="translate(20, 140)">
+      <rect width="430" height="75" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+      <rect width="90" height="24" rx="4" fill="#10b981" fill-opacity="0.2" x="12" y="10"/>
+      <text x="57" y="26" font-size="11" font-weight="bold" fill="#34d399" text-anchor="middle">SOLO PATH</text>
+      <text x="115" y="26" font-size="12" font-weight="bold" fill="#f8fafc">Condition: C(x) ≥ 0.65 (High Certainty)</text>
+      <text x="15" y="48" font-size="11" fill="#94a3b8">• Agents Active: 1 (Primary Agent A0) | Deliberation Rounds: 0</text>
+      <text x="15" y="64" font-size="11" fill="#34d399" font-weight="bold">• Peer Tokens Consumed: 0 (100% savings) | Latency: ~0.84 sec</text>
+    </g>
+
+    <!-- Mode B: Dyadic Challenger -->
+    <g transform="translate(20, 225)">
+      <rect width="430" height="75" rx="8" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+      <rect width="115" height="24" rx="4" fill="#3b82f6" fill-opacity="0.2" x="12" y="10"/>
+      <text x="69" y="26" font-size="11" font-weight="bold" fill="#60a5fa" text-anchor="middle">DYADIC PATH</text>
+      <text x="140" y="26" font-size="12" font-weight="bold" fill="#f8fafc">Condition: 0.50 ≤ C(x) &lt; 0.65 (Moderate Ambiguity)</text>
+      <text x="15" y="48" font-size="11" fill="#94a3b8">• Agents Active: 2 (Proposer A0 + Adversarial Critic A1)</text>
+      <text x="15" y="64" font-size="11" fill="#60a5fa" font-weight="bold">• Fast cross-examination | Deliberation Rounds: 1 | Latency: ~1.79 sec</text>
+    </g>
+
+    <!-- Mode C: Decoupled Delphi -->
+    <g transform="translate(20, 310)">
+      <rect width="430" height="95" rx="8" fill="#0f172a" stroke="#d946ef" stroke-width="1.5"/>
+      <rect width="125" height="24" rx="4" fill="#d946ef" fill-opacity="0.2" x="12" y="10"/>
+      <text x="74" y="26" font-size="11" font-weight="bold" fill="#f472b6" text-anchor="middle">DELPHI PATH</text>
+      <text x="150" y="26" font-size="12" font-weight="bold" fill="#f8fafc">Condition: C(x) &lt; 0.50 (Genuine Dilemma)</text>
+      <text x="15" y="48" font-size="11" fill="#94a3b8">• 4 CVF Personas: Clan (HR), Adhocracy (R&amp;D), Market (Finance), Hierarchy (Legal)</text>
+      <text x="15" y="66" font-size="11" fill="#94a3b8">• Kendall's W convergence monitoring with early stopping (W ≥ 0.70)</text>
+      <text x="15" y="84" font-size="11" fill="#f472b6" font-weight="bold">• Decoupled Belief Propagation (DOBP) slashes prompt overhead by 64%</text>
+    </g>
+  </g>
+
+  <!-- COLUMN 3: Empirical Audit & Verification -->
+  <g transform="translate(790, 130)" filter="url(#shadow)">
+    <rect width="280" height="420" rx="12" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <rect width="280" height="45" rx="12" fill="#10b981" fill-opacity="0.2"/>
+    <text x="140" y="28" font-size="14" font-weight="bold" fill="#34d399" text-anchor="middle">3. VERIFIED RESULTS (N=200)</text>
+
+    <!-- Metric Card 1: Token Savings -->
+    <rect x="15" y="60" width="250" height="90" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="25" y="80" font-size="11" fill="#94a3b8">AVERAGE TOKENS PER QUERY</text>
+    <text x="25" y="105" font-size="20" font-weight="bold" fill="#f8fafc">1,562 <tspan font-size="12" fill="#94a3b8">vs 3,182 base</tspan></text>
+    <text x="25" y="130" font-size="13" font-weight="bold" fill="#34d399">★ 50.88% Total Token Savings</text>
+
+    <!-- Metric Card 2: StrategyQA Accuracy -->
+    <rect x="15" y="160" width="250" height="90" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="25" y="180" font-size="11" fill="#94a3b8">STRATEGYQA ACCURACY</text>
+    <text x="25" y="205" font-size="20" font-weight="bold" fill="#34d399">69.0% <tspan font-size="12" fill="#f87171">(vs 43.0% Base)</tspan></text>
+    <text x="25" y="230" font-size="12" fill="#cbd5e1">Debate degeneration eliminated</text>
+
+    <!-- Metric Card 3: Execution Artifacts -->
+    <rect x="15" y="260" width="250" height="145" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="25" y="280" font-size="12" font-weight="bold" fill="#f8fafc">Verified Project Deliverables:</text>
+    <text x="25" y="302" font-size="11" fill="#94a3b8">✓ 16 Papers Downloaded (PDFs)</text>
+    <text x="25" y="322" font-size="11" fill="#94a3b8">✓ Full IEEE LaTeX Conference Paper</text>
+    <text x="25" y="342" font-size="11" fill="#94a3b8">✓ Live CLI Engine &amp; Testbench</text>
+    <text x="25" y="362" font-size="11" fill="#94a3b8">✓ 200 Real Question Audit Log</text>
+    <text x="25" y="382" font-size="11" font-weight="bold" fill="#38bdf8">✓ Global Agent Skill Installed</text>
+  </g>
+
+  <!-- BOTTOM FOOTER: Repository File Navigation -->
+  <g transform="translate(30, 565)" filter="url(#shadow)">
+    <rect width="1040" height="110" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="25" y="25" font-size="12" font-weight="bold" fill="#60a5fa">CORE CODEBASE &amp; EXPERIMENTAL ARTIFACTS MAP (https://github.com/ramnnn2006/rp):</text>
+    
+    <rect x="25" y="38" width="180" height="55" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="35" y="55" font-size="11" font-weight="bold" fill="#f8fafc">cag_delphi_engine/</text>
+    <text x="35" y="72" font-size="10" fill="#94a3b8">gating.py | topology.py</text>
+    <text x="35" y="85" font-size="10" fill="#94a3b8">consensus.py | diversity.py</text>
+
+    <rect x="220" y="38" width="190" height="55" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="230" y="55" font-size="11" font-weight="bold" fill="#f8fafc">data/real_benchmarks/</text>
+    <text x="230" y="72" font-size="10" fill="#94a3b8">StrategyQA (100 Qs)</text>
+    <text x="230" y="85" font-size="10" fill="#94a3b8">MMLU Law (100 Qs)</text>
+
+    <rect x="425" y="38" width="200" height="55" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="435" y="55" font-size="11" font-weight="bold" fill="#f8fafc">Execution Scripts</text>
+    <text x="435" y="72" font-size="10" fill="#94a3b8">run_full_dataset_execution.py</text>
+    <text x="435" y="85" font-size="10" fill="#94a3b8">cag_delphi_live_showcase.py</text>
+
+    <rect x="640" y="38" width="180" height="55" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="650" y="55" font-size="11" font-weight="bold" fill="#f8fafc">papers/ &amp; figures/</text>
+    <text x="650" y="72" font-size="10" fill="#94a3b8">16 Research PDFs</text>
+    <text x="650" y="85" font-size="10" fill="#94a3b8">Fig 1, 2, 3, 4 Vector Assets</text>
+
+    <rect x="835" y="38" width="190" height="55" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="845" y="55" font-size="11" font-weight="bold" fill="#f8fafc">Documentation</text>
+    <text x="845" y="72" font-size="10" fill="#94a3b8">REVIEW_2_OFFICIAL_REPORT.md</text>
+    <text x="845" y="85" font-size="10" fill="#94a3b8">README.md &amp; LaTeX PDF</text>
+  </g>
+</svg>

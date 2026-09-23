@@ -1,0 +1,54 @@
+{
+  "solo": {
+    "accuracy": 49.8,
+    "accuracy_ci95": 4.38,
+    "avg_tokens": 380.0,
+    "std_tokens": 0.0,
+    "avg_latency": 0.84,
+    "std_latency": 0.0,
+    "avg_geval": 0.4553,
+    "degradation_rate": 0.0
+  },
+  "uncond": {
+    "accuracy": 67.8,
+    "accuracy_ci95": 4.1,
+    "avg_tokens": 7100.0,
+    "std_tokens": 0.0,
+    "avg_latency": 5.46,
+    "std_latency": 0.0,
+    "avg_geval": 0.7141,
+    "degradation_rate": 2.0
+  },
+  "cag": {
+    "accuracy": 83.6,
+    "accuracy_ci95": 3.25,
+    "avg_tokens": 880.3,
+    "std_tokens": 517.7,
+    "avg_latency": 1.84,
+    "std_latency": 0.99,
+    "avg_geval": 0.7052,
+    "degradation_rate": 0.0,
+    "token_savings_pct": 87.6,
+    "topology_distribution": {
+      "SOLO_FAST_PATH": {
+        "count": 222,
+        "percent": 44.4
+      },
+      "DYADIC_CHALLENGER": {
+        "count": 38,
+        "percent": 7.6
+      },
+      "DECOUPLED_DELPHI": {
+        "count": 240,
+        "percent": 48.0
+      }
+    }
+  },
+  "meta": {
+    "episodes": 500,
+    "tau_threshold": 0.65,
+    "random_seed": 42,
+    "total_execution_wall_time_sec": 0.0106,
+    "timestamp": "2026-09-23T13:18:28.790478"
+  }
+}

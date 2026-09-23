@@ -3,7 +3,7 @@
 
 **Academic Review Milestone:** Review 2 (Mid-Term Evaluation & Working Prototype Audit)  
 **Team Size:** 2 Members  
-**Primary Repository:** [https://github.com/ramnnn2006/rp](https://github.com/ramnnn2006/rp)  
+**Primary Repository:** [https://github.com/ramnnn2006/confidence-gated-consultation](https://github.com/ramnnn2006/confidence-gated-consultation)  
 **Status:** Working Algorithmic Prototype, Mathematical Proofs, 16 Papers Synthesized, 200 Real Academic Questions Audited  
 
 ---

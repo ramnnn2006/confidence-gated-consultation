@@ -173,4 +173,4 @@ python3 simulation_testbench.py --episodes 100
 ```
 
 ---
-*Developed for Review 2 Evaluation | Repository: [ramnnn2006/rp](https://github.com/ramnnn2006/rp)*
+*Developed for Review 2 Evaluation | Repository: [ramnnn2006/confidence-gated-consultation](https://github.com/ramnnn2006/confidence-gated-consultation)*

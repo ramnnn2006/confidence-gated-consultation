@@ -1,10 +1,10 @@
 # Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems (CG-SC)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Paper Status](https://img.shields.io/badge/IEEE-Conference%20Ready-success.svg)]()
-[![Review Status](https://img.shields.io/badge/Review%202-Prototype%20Audited-brightgreen.svg)]()
-[![Benchmarks](https://img.shields.io/badge/Benchmarks-StrategyQA%20%7C%20MMLU%20Law-orange.svg)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-334155?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8+-334155?style=flat-square)](https://www.python.org/downloads/)
+[![Paper Status](https://img.shields.io/badge/IEEE-Conference%20Ready-334155?style=flat-square)]()
+[![Review Status](https://img.shields.io/badge/Review%202-Prototype%20Audited-334155?style=flat-square)]()
+[![Benchmarks](https://img.shields.io/badge/Benchmarks-StrategyQA%20%7C%20MMLU%20Law-334155?style=flat-square)]()
 
 > **Official Research Repository:** *Confidence-Gated Selective Consultation in LLM-Based Multi-Agent Decision Systems*  
 > **Core Literature Foundation:** Grounded in **Lee & Kwon (2026, *Applied Sciences*)**, **Jiang & Yang (2025, *Systems*)**, **Zhu et al. (2026)**, and **Kalyuzhnaya et al. (2025)**.  
@@ -31,19 +31,15 @@ flowchart TD
     Dyad --> Out
     Delphi --> Out
 
-    classDef primary fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
-    classDef gate fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#f8fafc;
-    classDef solo fill:#0f2e1b,stroke:#10b981,stroke-width:2px,color:#34d399;
-    classDef dyad fill:#172554,stroke:#60a5fa,stroke-width:2px,color:#93c5fd;
-    classDef delphi fill:#3b0764,stroke:#d946ef,stroke-width:2px,color:#f472b6;
-    classDef finalNode fill:#1e293b,stroke:#e2e8f0,stroke-width:2px,color:#f8fafc;
+    classDef neutral fill:#0f172a,stroke:#475569,stroke-width:1.5px,color:#f8fafc;
+    classDef gateNode fill:#1e293b,stroke:#64748b,stroke-width:2px,color:#f8fafc;
+    classDef pathNode fill:#1e293b,stroke:#94a3b8,stroke-width:1.5px,color:#f8fafc;
+    classDef outNode fill:#0f172a,stroke:#cbd5e1,stroke-width:2px,color:#f8fafc;
 
-    class In,PA primary;
-    class ECG,Gate gate;
-    class Solo solo;
-    class Dyad dyad;
-    class Delphi delphi;
-    class Out finalNode;
+    class In,PA neutral;
+    class ECG,Gate gateNode;
+    class Solo,Dyad,Delphi pathNode;
+    class Out outNode;
 ```
 
 ---
@@ -66,15 +62,8 @@ flowchart LR
         end
     end
 
-    classDef clan fill:#064e3b,stroke:#34d399,stroke-width:1.5px,color:#ecfdf5;
-    classDef adhoc fill:#4c1d95,stroke:#c084fc,stroke-width:1.5px,color:#faf5ff;
-    classDef market fill:#78350f,stroke:#fbbf24,stroke-width:1.5px,color:#fffbeb;
-    classDef hier fill:#1e3a5f,stroke:#60a5fa,stroke-width:1.5px,color:#eff6ff;
-
-    class Clan clan;
-    class Adhocracy adhoc;
-    class Market market;
-    class Hierarchy hier;
+    classDef cvfBox fill:#1e293b,stroke:#64748b,stroke-width:1.5px,color:#f8fafc;
+    class Clan,Adhocracy,Hierarchy,Market cvfBox;
 ```
 
 ---
